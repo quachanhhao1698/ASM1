@@ -1,0 +1,77 @@
+.profileTitle{
+  text-align: center;
+  /* font-size: 32px; */
+}
+
+.infoUser {
+  background-color: #0c9df127;
+  box-shadow: 8px 4px 8px #333;
+  display:flex;
+  justify-content:space-around;
+  padding: 20px;
+  flex-wrap: wrap;
+  margin: 10px 10%;
+}
+.infoUser__image{
+  /* padding-right: 50px; */
+}
+.infoUser__image img{
+  border: 4px #0c9df1 solid;
+  border-radius: 30% 0 0 0  ;
+  width: 300px;
+  height: 400px;
+  /* margin-top: 40px; */
+  overflow: hidden;
+}
+
+.infoUser__info input{
+  display: block;
+  background-color: white;
+  border: 2px solid #0c9df1;
+  height: 40px;
+  padding: 5px;
+  border-radius: 0 25px 25px 0;
+  width: 400px;
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 10px;
+
+}
+
+.infoUser__info label{
+  text-align: left;
+  /* display: block; */
+  padding: 5px 0;
+}
+
+.infoUser__info button {
+  width: 20%;
+  margin: auto;
+  padding: 16px;
+  display: block;
+  border: none;
+  background-color: #0c9df1;
+  border-radius: 30px;
+  cursor: pointer;
+  /* font-size: 16px; */
+  color: white;
+  opacity: .3;
+}
+
+.infoUser__info button:hover {
+  width: 50%;
+  opacity: 1;
+  box-shadow: 6px 3px 5px #333;
+  transition: all .4s ease;
+
+}
+
+.input__info{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.input__info label {
+  display: block;
+  width: 120px;
+}

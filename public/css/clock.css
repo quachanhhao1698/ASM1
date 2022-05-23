@@ -1,0 +1,36 @@
+#clock{
+  border: 2px solid #0c9df1;
+  border-radius: 25px;
+  float: right;
+  padding: 10px;
+  margin: 10px 20px 0 0;
+  text-align: center;
+  /* box-shadow: 0 0 8px rgb(2, 211, 253); */
+}
+#clock h2 {
+  color: #0c9df1;
+  text-align: center;
+  border: 2px solid #0c9df1;
+  box-shadow: 0 0 12px rgb(2, 211, 253);
+  padding: 5px;
+  margin: 0;
+  border-radius: 15px 15px 0 0;
+}
+#content{
+  border: 2px solid #0c9df1;
+  border-radius: 0 0 15px 15px;
+  box-shadow: 0 0 12px rgb(2, 211, 253);
+
+  padding: 5px;
+  
+}
+#date {
+  color: red;
+  font-size: 20px;
+  margin: 5px 0;
+}
+
+#time{
+  font-size: 20px;
+
+}

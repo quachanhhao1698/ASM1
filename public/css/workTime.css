@@ -1,0 +1,27 @@
+.workTime__content{
+  /* background-color: aqua; */
+  display: flex;
+  justify-content: space-between;
+}
+.workTime__content--left{
+  display: flex;
+  align-items: flex-start;
+  width: 75%;
+  flex-wrap: wrap;
+}
+
+.workTime__content--right{
+  display: flex;
+  flex-wrap: wrap;
+  /* flex-direction: column; */
+  width: 25%;
+  border-left: 2px solid black;
+}
+.workTime__content--rightTitle{
+  text-align: center;
+}
+.workTime__content--rightContent{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

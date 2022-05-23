@@ -1,0 +1,47 @@
+.info__staff {
+    text-align: center;
+    width: 50%;
+    margin: auto;
+    padding: 10px;
+}
+
+.attendance__content {
+    /* background-color: aqua; */
+    display: flex;
+    justify-content: space-around;
+}
+
+.attendance__content--left {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 75%;
+}
+
+.attendance__content--leftTitle {
+    text-align: center;
+}
+
+.attendance__content--leftContent {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.attendance__content--right {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 25%;
+    border-left: 2px solid black;
+}
+
+.attendance__content--rightTitle {
+    text-align: center;
+}
+
+.attendance__content--rightContent {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

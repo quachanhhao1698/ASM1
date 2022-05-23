@@ -1,0 +1,165 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/modal.css" />
+<link rel="stylesheet" href="/css/clock.css" />
+<link rel="stylesheet" href="/css/attendance.css" />
+
+<body>
+  <%- include('../includes/navigation.ejs') %> <%-
+  include('../includes/clock.ejs')%>
+  <div class="info__staff">
+    <form action="/create-attendance" method="POST">
+      <h3>Họ và tên: <%=staff.staffInfo.name %></h3>
+      <h4>
+        Trạng thái: <%= staff.status == false ?'Đang rảnh' : 'Đang làm việc' %>
+      </h4>
+
+      <h4>Nơi làm việc:</h4>
+      <input name="workPlace" id="home" type="radio" value="Nhà" />
+      <label for="home">Tại nhà</label>
+      <input
+        name="workPlace"
+        id="company"
+        type="radio"
+        value="Công ty"
+        checked
+      />
+      <label for="company">Tại công ty</label>
+      <input name="workPlace" id="customer" type="radio" value="Khách hàng" />
+      <label for="customer">Với khách hàng</label>
+      <hr />
+      <button
+        class="<%=staff.status === false ? 'btn' : 'hidden'%>"
+        type="submit"
+      >
+        Bắt đầu
+      </button>
+    </form>
+    <form action="end-attendance" method="POST">
+      <button
+        class="<%=staff.status === true ? 'btn danger' : 'hidden'%>"
+        type="hidden"
+      >
+        Kết thúc
+      </button>
+    </form>
+    <button class="btn onLeave onLeave" onclick="showModal()">Nghỉ phép</button>
+  </div>
+
+  <hr />
+  <div class="grid attendance__content">
+    <% if(staff.workTime.length > 0){%>
+    <div class="attendance__content--left">
+      <div class="attendance__content--leftTitle">
+        <h3>Danh sách điểm danh</h3>
+      </div>
+      <div class="attendance__content--leftContent">
+        <% for (time of staff.workTime) {%>
+        <article class="card product-item">
+          <!-- <header class="card__header">
+        </header> -->
+          <div class="card__content">
+            <p class="" style="text-align: center"><%=time.workPlace%></p>
+            <hr />
+            <p class="">
+              Bắt đầu
+              <%=time.startTime.getHours()+':'+time.startTime.getMinutes()+':'+time.startTime.getSeconds()%>
+            </p>
+            <p class="">
+              Kết thúc <%=time.endTime==null
+              ?'':time.endTime.getHours()+':'+time.endTime.getMinutes()+':'+time.endTime.getSeconds()%>
+            </p>
+            <p class="">Tổng thời gian: <%= time.totalTime%></p>
+          </div>
+        </article>
+        <%}%>
+      </div>
+    </div>
+    <%} else {%>
+    <div></div>
+    <%}%>
+     
+  </div>
+
+  <div class="modal js-modal">
+    <div class="modal-container js-modal-container">
+      <header class="modal-header">
+        <!-- Button close -->
+        <div class="modal-close js-modal-close">
+          <i class="ti-close">X</i>
+        </div>
+        <!-- Heading -->
+        <div class="modal-heading">Đăng ký nghỉ phép</div>
+      </header>
+
+      <div class="modal-body">
+        <form action="/add-annualLeave" method="POST">
+          <!-- Input -->
+
+          <h3 class="modal-label">
+            Số ngày nghỉ còn lại: <%=staff.staffInfo.annualLeave%> ngày
+          </h3>
+          <% if(staff.staffInfo.annualLeave <= 0) {%>
+          <h3 class="danger">Bạn đã hết số ngày nghỉ nên không thể đăng ký</h3>
+          <%}else{%>
+
+          <select
+            class="modal-input"
+            id="typeOfLeave"
+            onchange="handleSelect(this)"
+          >
+            <option selected value="">Chọn hình thức nghỉ</option>
+            <% if(staff.staffInfo.annualLeave <= 1) {%>
+            <option value="hour">Nghỉ theo giờ</option>
+            <%}else{%>
+            <option value="hour">Nghỉ theo giờ</option>
+            <option value="day">Nghỉ theo ngày</option>
+            <%}%>
+          </select>
+
+          <div class="dayLeave js-dayLeave hideDayLeave">
+            <label for="startDay" class="modal-label"> Từ ngày: </label>
+            <input
+              class="modal-input"
+              type="date"
+              id="startDay"
+              name="startDay"
+            />
+
+            <label for="endDay" class="modal-label"> Đến ngày: </label>
+            <input class="modal-input" type="date" id="endDay" name="endDay" />
+          </div>
+
+          <div class="hourLeave js-hourLeave">
+            <label for="day" class="modal-label">Ngày: </label>
+            <input class="modal-input" type="date" id="day" name="day" />
+            <label for="hour" class="modal-label"> Thời gian nghỉ: </label>
+            <input
+              type="range"
+              min="0"
+              max="8"
+              id="hourRange"
+              class="hourRange"
+              name="hour"
+            /><span id="outHour"></span><span> Giờ</span>
+          </div>
+
+          <label for="reason" class="modal-label"> Lý do: </label>
+          <textarea
+            class="modal-input"
+            name="reason"
+            id=""
+            cols="30"
+            rows="10"
+          ></textarea>
+
+          <button class="modal-btn">Xác nhận <i class="ti-check"></i></button>
+
+          <%}%>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="/js/modal.js"></script>
+<script src="/js/clock.js"></script>
+<%- include('../includes/end.ejs') %>

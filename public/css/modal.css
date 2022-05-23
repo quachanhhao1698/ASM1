@@ -1,0 +1,142 @@
+    
+.modal {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+}
+
+.openmodal {
+  display: flex;
+  transition: all 0.4s ease-in-out;
+}
+
+.modal-container {
+  background-color: #fff;
+  position: relative;
+  width: 600px;
+  animation: modalFadeIn ease .5s;
+  border-radius: 25px;
+  box-shadow: 10px 8px 10px #333;
+
+
+}
+
+.modal-header {
+  background-color: #0c9df1;
+  text-align: center;
+  padding: 20px 16px;
+  /* border-radius: 25px; */
+
+}
+
+.modal-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 8px 16px;
+  color: #fff;
+  opacity: .5;
+  transition: all 0.4s ease-in-out;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  opacity: 1;
+  font-size: 20px;
+  transform: rotate(180deg);
+}
+
+.modal-heading {
+  color: #fff;
+  font-size: 30px;
+}
+
+.heading-icon {
+  color: #fff;
+  font-size: 30px;
+  margin-right: 16px;
+}
+
+.modal-body {
+  padding: 0.15px 16px;
+}
+
+.modal-label {
+  display: block;
+  margin: 15px 0px;
+}
+
+.modal-input {
+  padding: 8px;
+  width: 100%;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.modal-btn {
+  color: white;
+  text-transform: uppercase;
+  display: block;
+  background-color: #0c9df1;
+  text-align: center;
+  margin: 10px auto;
+  padding: 16px;
+  border: none;
+  width: 50%;
+  opacity: 0.5;
+  border-radius: 25px;
+}
+
+.modal-btn:hover {
+  /* opacity: 1;
+  cursor: pointer;
+  transition: all .4s ease-in; */
+  width: 100%;
+  opacity: 1;
+  /* box-shadow: 6px 3px 5px #333; */
+  transition: all .4s ease-in-out;
+  
+}
+
+.modal-body>p {
+  float: right;
+  margin-bottom: 32px;
+}
+
+@keyframes modalFadeIn {
+  from {
+      opacity: 0;
+      transform: translatey(-140px);
+  }
+  to {
+      opacity: 1;
+      transform: translate(0px);
+  }
+}
+.dayLeave{
+  display: none;
+}
+
+.showDayLeave{
+  display: block;
+}
+
+.hourLeave{
+  display: none;
+}
+
+.showHourLeave{
+  display: block;
+}
+
+.hourRange {
+  width: 80%;
+  margin: 0 10px;
+}

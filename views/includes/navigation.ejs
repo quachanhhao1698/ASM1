@@ -1,0 +1,23 @@
+<div class="backdrop"></div>
+<header class="main-header">
+  <button id="side-menu-toggle">Menu</button>
+  <nav class="main-header__nav">
+    <ul class="main-header__item-list">
+      <li class="main-header__item">
+        <a class="<%= path === '/' ? 'active' : '' %>" href="/">Trang chủ</a>
+      </li>
+      <li class="main-header__item">
+        <a class="<%= path === '/attendance' ? 'active' : '' %>" href="/attendance">Điểm danh</a>
+      </li>
+      <li class="main-header__item">
+        <a class="<%= path === '/profile' ? 'active' : '' %>" href="/profile">Thông tin nhân viên</a>
+      </li>
+      <li class="main-header__item">
+        <a class="<%= path === '/workTime' ? 'active' : '' %>" href="/workTime">Thông tin giờ làm</a>
+      </li>
+      <li class="main-header__item">
+        <a class="<%= path === '/covid' ? 'active' : '' %>" href="/covid">Thông tin COVID-19</a>
+      </li>
+    </ul>
+  </nav>
+</header>
