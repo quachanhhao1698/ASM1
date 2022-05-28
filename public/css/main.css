@@ -3,18 +3,26 @@
 * {
   box-sizing: border-box;
 }
+html{
+  font-size: 62.5%;
+
+}
 
 body {
+  font-size: 1.6rem;
   padding: 0;
   margin: 0;
   font-family: Arial, Helvetica, sans-serif,'Open Sans', sans-serif;
+  background-image: url("../images/background.jpg");
+
+
 }
 header {
-  /* margin: 10px 20px; */
 }
 main {
   /* padding: 1rem; */
   margin: auto;
+
 }
 
 form {
@@ -35,7 +43,7 @@ form {
 
 .main-header {
   /* width: 100%; */
-  height: 3.5rem;
+  height: 4.5rem;
   background-color: #0c9df1;
   padding: 0 1.5rem;
   display: flex;
@@ -67,7 +75,7 @@ form {
   text-decoration: none;
   color: white;
   /* text-transform: uppercase; */
-  padding: 8px;
+  padding: .8rem;
   display: block;
   width: 100%;
   text-align: center;
@@ -75,17 +83,17 @@ form {
 
 .main-header__item a:hover{
   /* box-shadow: 6px 3px 5px #333; */
-  box-shadow: 0 0 18px rgb(0, 251, 255);
-  border-radius: 25px;
+  box-shadow: 0 0 1.8rem rgb(0, 251, 255);
+  border-radius: 2.5rem;
   transition: all .5s ease;
 }
 .main-header__item a:active,
 .main-header__item a.active {
   /* background-color: rgba(0, 0, 0, 0.186); */
   /* box-shadow: 6px 3px 5px #333; */
-  box-shadow: 0 0 18px rgba(0, 251, 255, 0.958);
-  border-radius: 25px;
-  padding: 8px;
+  box-shadow: 0 0 1.8rem rgba(0, 251, 255, 0.958);
+  border-radius: 2.5rem;
+  padding: .8rem;
   transition: all .5s ease;
 }
 
@@ -96,18 +104,26 @@ form {
   align-self: flex-start;
   justify-content: center;
   /* align-items: stretch; */
-  padding: 10px;
+  padding: 1rem;
 }
 
 .card {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  border-radius: 25px;
-  margin: 10px;
+  box-shadow: 0 .2rem .8rem rgba(0, 0, 0, 0.26);
+  border-radius: 2.5rem;
+  margin: 1rem;
+  background-color: white;
 }
 
 .card__header,
 .card__content {
   padding: 1rem;
+}
+.card__content--title{
+  text-align: center;
+  font-weight: bold;
+}
+.blueText{
+  color: #0c9df1;
 }
 
 .card__header h1,
@@ -133,7 +149,7 @@ form {
   border: 1px solid #00695c;
   color: #00695c;
   background: white;
-  border-radius: 3px;
+  border-radius: .3rem;
   cursor: pointer;
 }
 .hidden{
@@ -177,7 +193,6 @@ form {
     display: none;
   }
 }
-
 
 
 

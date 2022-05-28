@@ -1,0 +1,224 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/main.css" />
+<link rel="stylesheet" href="/css/modal.css" />
+<link rel="stylesheet" href="/css/vaccine.css" />
+
+<body>
+  <%- include('../includes/navigation.ejs') %>
+  <div class="main">
+    <div class="group__button">
+      <button class="btn" onclick="showModal__temperature()">Thân nhiệt</button>
+      <button class="btn" onclick="showModal__vaccineInfo()">
+        Tiêm Vaccine
+      </button>
+      <button class="btn" onclick="showModal__infectCovidInfo()">Nhiễm Covid</button>
+    </div>
+    <div class="vaccine__content">
+      <div>
+        <h2>Thông tin thân nhiệt</h2>
+        <ul>
+          <%for(bt of bodyTemperature){%>
+          <li>
+            Ngày:
+            <%=bt.date.getDate()+'/'+(bt.date.getMonth()+1)+'/'+bt.date.getFullYear()%>
+          </li>
+          <li>Thời gian: <%=bt.time%></li>
+          <li>Nhiệt độ: <%=bt.temperature%> <sup>o</sup>C</li>
+          <br />
+          <%}%>
+        </ul>
+      </div>
+      <div>
+        <h2>Thông tin tiêm vaccine</h2>
+        <ul>
+          <%for(const[i,v] of vaccineInfo.entries()){%>
+            <li>Mui <%=i+1%></li>
+          <li>
+            Ngày tiêm:
+            <%=v.date.getDate()+'/'+(v.date.getMonth()+1)+'/'+v.date.getFullYear()%>
+          </li>
+          <li>Tên vaccine: <%=v.nameVaccine%> </li>
+          <br />
+          <%}%>
+        </ul>
+      </div>
+      <div><h2>Thông tin nhiễm covid</h2>
+        <ul>
+          <%for(const[i,v] of infectCovidInfo.entries()){%>
+            <li>Lần nhiễm thứ : <%=i+1%></li>
+          <li>Ngày nhiễm bệnh:
+            <%=v.datePositive.getDate()+'/'+(v.datePositive.getMonth()+1)+'/'+v.datePositive.getFullYear()%>
+          </li>
+          <li>Ngày khỏi bệnh:
+            <%=v.dateRecover.getDate()+'/'+(v.dateRecover.getMonth()+1)+'/'+v.dateRecover.getFullYear()%>
+          </li>
+          <br />
+          <%}%>
+        </ul></div>
+    </div>
+  </div>
+
+  <!-- modal thông tin thân nhiệt -->
+  <div class="modal__temperature js-modal__temperature">
+    <div class="modal__temperature-container js-modal__temperature-container">
+      <header class="modal-header">
+        <!-- Button close -->
+        <div class="modal-close js-modal__temperature-close">
+          <i class="ti-close">X</i>
+        </div>
+        <!-- Heading -->
+        <div class="modal-heading">Đăng ký thông tin thân nhiệt</div>
+      </header>
+      <div class="modal-body">
+        <form action="/postBodyTemperature" method="POST">
+          <!-- Input -->
+          <div class=" ">
+            <label for="date_temperature" class="modal-label">Ngày : </label>
+            <input
+              class="modal-input"
+              type="date"
+              id="date"
+              name="date_temperature"
+              required
+            />
+            <label for="time_temperature" class="modal-label">Giờ: </label>
+            <input
+              class="modal-input"
+              type="time"
+              id="date"
+              name="time_temperature"
+              required
+            />
+            <label for="temperature" class="modal-label"
+              >Nhiệt độ ( <sup>o</sup>C ) :
+            </label>
+            <input
+              class="modal-input"
+              type="text"
+              id="temperature"
+              name="temperature"
+              required
+            />
+          </div>
+          <button class="modal-btn">Xác nhận <i class="ti-check"></i></button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- ----------------------------- -->
+  <!-- Modal thông tin tiêm vaccine -->
+  <div class="modal__vaccineInfo js-modal__vaccineInfo">
+    <div class="modal__vaccineInfo-container js-modal__vaccineInfo-container">
+      <header class="modal-header">
+        <!-- Button close -->
+        <div class="modal-close js-modal__vaccineInfo-close">
+          <i class="ti-close">X</i>
+        </div>
+        <!-- Heading -->
+        <div class="modal-heading"><%=vaccineInfo.length ==0?'Đăng ký thông tin tiêm vaccine':'Sửa thông tin tiêm vaccine' %></div>
+      </header>
+      <div class="modal-body">
+        <form action="/addVaccineInfo" method="POST">
+          <!-- Input -->
+          <div class=" ">
+            <h3>Mũi 1</h3>
+            <hr />
+            <label for="date_vaccineInfo1" class="modal-label"
+              >Ngày tiêm:
+            </label>
+            <input
+              class="modal-input"
+              type="date"
+              id="date_vaccineInfo1"
+              name="date_vaccineInfo1"
+              value="2020/12/05"
+              required
+            />
+            <label for="name_vaccineInfo1" class="modal-label"
+              >Tên vaccine :
+            </label>
+            <input
+              class="modal-input"
+              type="text"
+              id="name_vaccineInfo1"
+              name="name_vaccineInfo1"
+              value="<%=vaccineInfo.length >0 ? vaccineInfo[0].nameVaccine : '' %>"
+              required
+            />
+          </div>
+          <div class=" ">
+            <h3>Mũi 2</h3>
+            <hr />
+            <label for="date_vaccineInfo2" class="modal-label"
+              >Ngày Tiêm:
+            </label>
+            <input
+              class="modal-input"
+              type="date"
+              id="date_vaccineInfo2"
+              name="date_vaccineInfo2"
+              required
+            />
+            <label for="name_vaccineInfo2" class="modal-label"
+              >Tên vaccine:
+            </label>
+            <input
+              class="modal-input"
+              type="text"
+              id="name_vaccineInfo2"
+              name="name_vaccineInfo2"
+              value="<%=vaccineInfo.length >0 ? vaccineInfo[1].nameVaccine : '' %>"
+              required
+            />
+          </div>
+          <button type="submit" class="modal-btn">
+            Xác nhận <i class="ti-check"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- ----------------------------- -->
+  <!-- modal thông tin nhiễm covid -->
+  <div class="modal__infectCovidInfo js-modal__infectCovidInfo">
+    <div class="modal__infectCovidInfo-container js-modal__infectCovidInfo-container">
+      <header class="modal-header">
+        <!-- Button close -->
+        <div class="modal-close js-modal__infectCovidInfo-close">
+          <i class="ti-close">X</i>
+        </div>
+        <!-- Heading -->
+        <div class="modal-heading">Đăng ký thông tin nhiễm covid</div>
+      </header>
+      <div class="modal-body">
+        <form action="/postInfectCovidInfo" method="POST">
+          <!-- Input -->
+          <div class=" ">
+            <label for="datePositive" class="modal-label">Ngày nhiễm bệnh: </label>
+            <input
+              class="modal-input"
+              type="date"
+              id="date"
+              name="datePositive"
+              required
+            />
+            <label for="dateRecover" class="modal-label">Ngày khỏi bệnh: </label>
+            <input
+              class="modal-input"
+              type="date"
+              id="date"
+              name="dateRecover"
+              required
+            />
+            
+          </div>
+          <button class="modal-btn">Xác nhận <i class="ti-check"></i></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="/js/modal.js"></script>
+<script src="/js/modalVaccine.js"></script>
+
+<%- include('../includes/end.ejs') %>

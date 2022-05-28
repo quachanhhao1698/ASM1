@@ -1,0 +1,12 @@
+
+body{
+  background-image: url("../images/backgroundIndex.jpg");
+
+}
+.content{
+  text-align: center;
+  padding: 2.0rem;
+}
+.content h1 {
+  font-size: 6.4rem;
+}

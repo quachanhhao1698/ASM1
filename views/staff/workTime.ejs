@@ -6,17 +6,43 @@
 
 <body>
   <%- include('../includes/navigation.ejs') %>
-
-  <hr />
-
   <div class="workTime__content">
+
     <div class="workTime__content--left">
+      <div class="card__content">
+        
+          <header class="card__header">
+            <h2>Danh sách đăng ký nghỉ phép</h2>
+          </header>
+          <% for (time of staff.leave) {%>
+          <!-- <div class="card__content"> -->
+            <hr>
+            <p class="">
+              Từ:
+              <%=time.startDay.getDate()+'/'+(time.startDay.getMonth()+1)+'/'+time.startDay.getFullYear()%>
+            </p>
+            <p class="">
+              Đến ngày:
+              <%=time.endDay.getDate()+'/'+(time.endDay.getMonth()+1)+'/'+time.endDay.getFullYear()%>
+            </p>
+            <p class="">Tổng thời gian: <%= time.totalDay%> ngày</p>
+            <p class="">Lý do: <%= time.reason%></p>
+          <!-- </div> -->
+          <%}%>
+        
+      </div>
+    </div>
+
+    <div class="workTime__content--center">
       <%for(tWork of timeWorked){%>
       <article class="card product-item">
-        <div class="card__content">
-          <h2 class="" style="text-align: center">Ngày <%=tWork.date%></h2>
-          <h4 class="" style="text-align: center">
+        <div class="card__content maxHeight">
+          <h3 class="" style="text-align: center">Ngày <%=tWork.date%></h3>
+          <h4 class="" >
             Tổng thời gian: <%=tWork.totalTime.toFixed(2)%> giờ
+          </h4>
+          <h4 class="" >
+            Tăng ca: <%=tWork.overTime.toFixed(2)%> giờ
           </h4>
           <hr />
           <% for(time of tWork.workTimes) {%>
@@ -37,54 +63,42 @@
     </div>
 
     <div class="workTime__content--right">
+      <div class="salary__info">
+        <h2>Bảng lương</h2>
+      </div>
+      <div class="salary">
+        <form action="/salary" method="POST">
+          <input class="input" type="hidden" id="month" name="month" />
+          <h3>Chọn tháng</h3>
+          <select id="selectMonth" onchange="handleSelectMonth(this)">
+            <option selected value=""></option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+          </select>
+          <button class="btn" type="submit">Xác nhận</button>
+        </form>
+
+      </div>
       <div class="card__content">
-        <article class="card product-item">
-          <header class="card__header">
-            <h2>Danh sách đăng ký nghỉ phép</h2>
-          </header>
-          <% for (time of staff.leave) {%>
-          <div class="card__content">
-            <hr />
-            <span class="">
-              Từ:
-              <%=time.startDay.getDate()+'/'+(time.startDay.getMonth()+1)+'/'+time.startDay.getFullYear()%>
-            </span>
-            <span class="">
-              - Đến ngày:
-              <%=time.endDay.getDate()+'/'+(time.endDay.getMonth()+1)+'/'+time.endDay.getFullYear()%>
-            </span>
-            <p class="">Tổng thời gian: <%= time.totalDay%> ngày</p>
-            <p class="">Lý do: <%= time.reason%></p>
-          </div>
-          <%}%>
-        </article>
+        <h2><%=month==null?'':'Tháng: '+month%></h2>
+        <h4>Hệ số lương: <%=staff.staffInfo.salaryScale%></h4>
+        <h4>Thời gian làm việc: <%=salary.totalTime.toFixed(2)%> giờ</h4>
+        <h4>Thời gian tăng ca: <%=salary.overTime.toFixed(2)%> giờ</h4>
+        <h4>Thời gian nghỉ: <%=salary.leaveTime.toFixed(2)%> giờ</h4>
+        <h4>Tổng Lương: <%=salary.salary%> đ</h4>
       </div>
     </div>
 
-  </div>
-  <div class="salary">
-
-    <form action="/salary" method="POST">
-      <input type="hidden" id="month" name="month">
-      <select id="selectMonth" onchange="handleSelectMonth(this)">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-      </select>
-      <button type="submit">ok</button>
-    </form>
-  </div>
-  <div>
-    <h2><%=salary%></h2>
   </div>
 </body>
 <script src="/js/modal.js"></script>

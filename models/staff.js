@@ -38,6 +38,25 @@ const staffSchema = new Schema({
       overTime: { type: Number },
     },
   ],
+  bodyTemperature: [
+    {
+      date: { type: Date },
+      temperature: { type: Number },
+      time: { type: String },
+    },
+  ],
+  vaccineInfo: [
+    {
+      nameVaccine: { type: String },
+      date: { type: Date },
+    },
+  ],
+  infectCovidInfo: [
+    {
+      datePositive: { type: Date },
+      dateRecover: { type: Date },
+    },
+  ],
 });
 
 //Bat dau diem danh
@@ -97,11 +116,16 @@ staffSchema.methods.addAnnualLeave = function (
       ),
       reason: leaveInfoByDay.reason,
     };
-    this.staffInfo.annualLeave = this.staffInfo.annualLeave - newLeave.totalDay;
-    const updateLeave = [...this.leave];
-    updateLeave.push(newLeave);
-    this.leave = updateLeave;
-    this.save();
+    if (Number(newLeave.totalDay) <= Number(this.staffInfo.annualLeave)) {
+      this.staffInfo.annualLeave =
+        this.staffInfo.annualLeave - newLeave.totalDay;
+      const updateLeave = [...this.leave];
+      updateLeave.push(newLeave);
+      this.leave = updateLeave;
+      this.save();
+    } else {
+      console.log("totalDayLeave > annualLeave");
+    }
   } else {
     const newLeave = {
       startDay: leaveInfoByHour.startDay,
@@ -119,12 +143,21 @@ staffSchema.methods.addAnnualLeave = function (
 
 staffSchema.methods.addTimeWorked = function () {
   const workedInDay = methods.totalWorkTime(this);
-  let overTime = workedInDay.totalTimeWorked % 8;
-  let totalTime = workedInDay.totalTimeWorked - overTime;
+  let totalTime;
+  let overTime;
+  if (workedInDay.totalTimeWorked <= 8) {
+    console.log('totalTime <= 8');
+    overTime = 0;
+    totalTime = workedInDay.totalTimeWorked;
+  } else {
+    console.log('totalTime > 8');
+    totalTime =8
+    overTime = Math.abs(workedInDay.totalTimeWorked -8);
+  }
   const newTimeWorked = {
     date: workedInDay.day,
     workTimes: workedInDay.workTimeInDay,
-    totalTime:totalTime,
+    totalTime: totalTime,
     overTime: overTime,
   };
   if (this.timeWorked.length <= 0) {
@@ -155,20 +188,46 @@ staffSchema.methods.addTimeWorked = function () {
   }
 };
 
-// staffSchema.methods.addSalary = function (month) {
-//   // let totalTime = 0;
-//   let overTime =0;
-//   //tong gio lam trong thang
-//   const monthWorked = this.timeWorked.filter((tw) => {
-//     return tw.date.split("/")[1] ==month;
-//   });
-//   console.log("monthWorked", monthWorked);
-//   for (wt of monthWorked) {
-//     // totalTime += wt.totalTime;
-//     overTime += wt.overTime;
-//   }
-  
-//   return this.staffInfo.salaryScale * 3000000 + (overTime)*200000;
-// };
+staffSchema.methods.addBodyTemperature = function (info) {
+  const newBodyTemperature = {
+    date: info.date,
+    time: info.time,
+    temperature: info.temperature,
+  };
+  if (this.bodyTemperature.length == 0) {
+    this.bodyTemperature.push(newBodyTemperature);
+    return this.save();
+  } else {
+    const updated = [...this.bodyTemperature];
+    updated.push(newBodyTemperature);
+    this.bodyTemperature = updated;
+    return this.save();
+  }
+};
+
+staffSchema.methods.addVaccineInfo = function (dose1, dose2) {
+  if (this.vaccineInfo.length == 0) {
+    this.vaccineInfo.push(dose1, dose2);
+    this.save();
+  } else {
+    const updated = [];
+    updated.push(dose1, dose2);
+    this.vaccineInfo = updated;
+    this.save();
+  }
+};
+
+staffSchema.methods.addInfectCovidInfo = function (infectCovidInfo) {
+
+  if (this.infectCovidInfo.length == 0) {
+    this.infectCovidInfo.push(infectCovidInfo);
+    return this.save();
+  } else {
+    const updated = [...this.infectCovidInfo];
+    updated.push(infectCovidInfo);
+    this.infectCovidInfo = updated;
+    return this.save();
+  }
+};
 
 module.exports = mongoose.model("Staff", staffSchema);

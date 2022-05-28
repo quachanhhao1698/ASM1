@@ -3,7 +3,6 @@ const moment = require("moment");
 const methods = require("../utils/methods");
 
 exports.getIndex = (req, res, next) => {
-
   res.render("index", {
     pageTitle: "Trang chủ",
     path: "/",
@@ -13,14 +12,20 @@ exports.getIndex = (req, res, next) => {
 exports.getAttendance = (req, res, next) => {
   Staff.findById(req.staff._id).then((staff) => {
     const day = new Date();
-    const today =day.getDate()+'/'+(day.getMonth()+1)+'/'+day.getFullYear()
+    const today =
+      day.getDate() + "/" + (day.getMonth() + 1) + "/" + day.getFullYear();
     // Hien thi thoi gian diem danh cua ngay hien tai
     staff.workTime = staff.workTime.filter((wt) => {
-      const workDay = wt.startTime.getDate()+'/'+(wt.startTime.getMonth()+1)+'/'+wt.startTime.getFullYear();
+      const workDay =
+        wt.startTime.getDate() +
+        "/" +
+        (wt.startTime.getMonth() + 1) +
+        "/" +
+        wt.startTime.getFullYear();
       return workDay === today;
     });
     res.render("staff/attendance", {
-      pageTitle: "Attendance",
+      pageTitle: "Điểm danh",
       path: "/attendance",
       staff: staff,
     });
@@ -31,7 +36,7 @@ exports.postAttendance = (req, res, next) => {
   const workPlace = req.body.workPlace;
   console.log(workPlace);
   Staff.findById(req.staff._id)
-    .then((staff) => {
+  .then((staff) => {
       return staff.addStartTime(workPlace);
     })
     .then(() => {
@@ -48,12 +53,9 @@ exports.postEndAttendance = (req, res, next) => {
     .then((staff) => {
       return staff.addEndTime();
     })
-    .then(staff => {
-      return staff.addTimeWorked();
-    })
-    .then(staff => {
+    .then((staff) => {
       res.redirect("/attendance");
-      return staff.addSalary();
+      return staff.addTimeWorked();
     })
     .catch((err) => {
       console.log(err);
@@ -91,7 +93,7 @@ exports.postAddAnnualLeave = (req, res, next) => {
 exports.getProfile = (req, res, next) => {
   Staff.findById(req.staff._id).then((staff) => {
     res.render("staff/profile", {
-      pageTitle: "Profile",
+      pageTitle: "Thông tin nhân viên",
       path: "/profile",
       staff: staff,
     });

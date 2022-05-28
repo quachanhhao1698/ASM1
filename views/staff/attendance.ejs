@@ -4,10 +4,11 @@
 <link rel="stylesheet" href="/css/attendance.css" />
 
 <body>
-  <%- include('../includes/navigation.ejs') %> <%-
-  include('../includes/clock.ejs')%>
+  <%- include('../includes/navigation.ejs') %>
+  
   <div class="info__staff">
     <form action="/create-attendance" method="POST">
+      <h1 style="color: red;"><%=(new Date()).getDate() +' / '+((new Date()).getMonth()+1)+' / '+(new Date()).getFullYear()%></h1>
       <h3>Họ và tên: <%=staff.staffInfo.name %></h3>
       <h4>
         Trạng thái: <%= staff.status == false ?'Đang rảnh' : 'Đang làm việc' %>
@@ -53,12 +54,13 @@
         <h3>Danh sách điểm danh</h3>
       </div>
       <div class="attendance__content--leftContent">
-        <% for (time of staff.workTime) {%>
+        <% for (const[i,time] of staff.workTime.entries()) {%>
         <article class="card product-item">
           <!-- <header class="card__header">
         </header> -->
           <div class="card__content">
-            <p class="" style="text-align: center"><%=time.workPlace%></p>
+            <p class="card__content--title blueText">Lần <%=i+1%></p>
+            <p class="card__content--title"><%=time.workPlace%></p>
             <hr />
             <p class="">
               Bắt đầu
@@ -68,7 +70,7 @@
               Kết thúc <%=time.endTime==null
               ?'':time.endTime.getHours()+':'+time.endTime.getMinutes()+':'+time.endTime.getSeconds()%>
             </p>
-            <p class="">Tổng thời gian: <%= time.totalTime%></p>
+            <p class="">Tổng: <%= time.totalTime%> giờ</p>
           </div>
         </article>
         <%}%>

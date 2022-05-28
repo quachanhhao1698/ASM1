@@ -10,7 +10,7 @@ exports.totalTime = (startTime, endTime) => {
   const totalHour = Number(hEnd - hStart);
 
   const totalMinute = Number(mEnd - mStart) / 60;
-  const totalTime = Math.floor(totalHour + totalMinute);
+  const totalTime = (totalHour + totalMinute).toFixed(2);
 
   return totalTime;
 };
@@ -28,7 +28,7 @@ exports.totalDay = (startDay, endDay) => {
   const totalMonth = Number(mEnd - mStart) * 30;
   const totalYear = Number(yEnd - yStart) * 365;
 
-  const total = Math.floor(totalDay + totalMonth + totalYear);
+  const total = (totalDay + totalMonth + totalYear).toFixed(2);
 
   return total;
 };
@@ -71,7 +71,7 @@ exports.totalWorkTime = (staff) => {
       const total = minutesEnd - minutesStart;
 
       const hoursWorked = wt.endTime.getHours() - wt.startTime.getHours();
-      return (totalTimeWorked = totalTimeWorked + hoursWorked + total);
+      return (totalTimeWorked = totalTimeWorked + hoursWorked + total).toFixed(2);
     }
   });
 
@@ -79,17 +79,47 @@ exports.totalWorkTime = (staff) => {
 };
 
 exports.addSalary = (month, staff) => {
-  // let totalTime = 0;
+  let totalTime = 0;
   let overTime = 0;
+  let leaveTime = 0;
+  let salary = 0;
+  let date = new Date();
+  let nowYear = date.getFullYear();
 
   const monthWorked = staff.timeWorked.filter((tw) => {
-    return tw.date.split("/")[1] == month;
+    return tw.date.split("/")[1] == month && tw.date.split("/")[2]==nowYear;
   });
-  console.log("monthWorked", monthWorked);
-  for (wt of monthWorked) {
-    // totalTime += wt.totalTime;
-    overTime += wt.overTime;
+  // console.log("monthWorked", monthWorked.length);
+  for (mw of monthWorked) {
+    totalTime += mw.totalTime;
+    overTime += mw.overTime;
   }
 
-  return staff.staffInfo.salaryScale * 3000000 + overTime * 200000;
+  const monthLeave = staff.leave.filter((l) => {
+    return l.startDay.getMonth() + 1 == month;
+  });
+  for (ml of monthLeave) {
+    // totalTime += wt.totalTime;
+    leaveTime += ml.totalDay;
+  }
+  leaveTime = leaveTime * 8;
+  salary = (
+    staff.staffInfo.salaryScale * 3000000 +
+    (overTime - (240 - (totalTime + leaveTime))) * 200000
+  ).toFixed(0);
+  if (salary > 0) {
+    return {
+      salary: salary,
+      totalTime: totalTime,
+      overTime: overTime,
+      leaveTime: leaveTime,
+    };
+  } else {
+    return {
+      salary: 0,
+      totalTime: totalTime,
+      overTime: overTime,
+      leaveTime: leaveTime,
+    };
+  }
 };

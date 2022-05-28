@@ -1,27 +1,72 @@
+
 .workTime__content{
   /* background-color: aqua; */
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
-.workTime__content--left{
+.workTime__content--center{
   display: flex;
   align-items: flex-start;
-  width: 75%;
+  align-content: flex-start;
+  width: 70%;
   flex-wrap: wrap;
+  justify-content: space-around;
+}
+.product-item{
+  width: 30.0rem;
+  border: 1.0rem solid rgb(0, 208, 255);
+  overflow:auto;
+  scrollbar-width: none;
+}
+.workTime__content--center .card__content {
+  /* max-height: 35vh; */
+}
+
+.maxHeight{
+  max-height: 35vh;
+}
+
+
+
+.workTime__content--left{
+  display: flex;
+  flex-wrap: wrap;
+  width: 15%;
+  border-right: .3rem solid #0c9df1;
+}
+.workTime__content--leftTitle{
+  text-align: center;
+}
+.workTime__content--leftContent{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .workTime__content--right{
   display: flex;
-  flex-wrap: wrap;
-  /* flex-direction: column; */
-  width: 25%;
-  border-left: 2px solid black;
+  flex-direction: column;
+  width: 15%;
+  border-left: .3rem solid #0c9df1;
+
 }
-.workTime__content--rightTitle{
-  text-align: center;
+
+.salary__info{
+text-align: center;
 }
-.workTime__content--rightContent{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+.salary{
+text-align: center;
+
+}
+.salary select{
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  text-decoration: none;
+  font: inherit;
+  border: .1rem solid #00695c;
+  color: #00695c;
+  background: white;
+  border-radius: .3rem;
+  cursor: pointer;
 }

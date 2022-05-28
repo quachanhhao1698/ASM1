@@ -1,0 +1,23 @@
+.main{
+  padding: 2.0rem;
+  display: flex;
+}
+.group__button {
+  display: flex;
+  flex-direction: column;
+  width: 10%;
+  padding: 0 1.0rem;
+}
+.group__button button {
+  margin-top: .5rem;
+  height: 10.0rem;
+  border-radius: 2.5rem;
+  font-size: 2.8rem;
+}
+.vaccine__content{
+  width: 90%;
+  background-color: #0c9df127;
+  border-radius: 2.5rem;
+  display: flex;
+  justify-content: space-around;
+}
