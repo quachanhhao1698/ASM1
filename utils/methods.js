@@ -38,21 +38,11 @@ exports.totalWorkTime = (staff) => {
   const workTimeInDay = [];
   const workTimesLength = staff.workTime.length;
   let startTime = staff.workTime[workTimesLength - 1].startTime;
-  let day =
-    startTime.getDate() +
-    "/" +
-    (startTime.getMonth() + 1) +
-    "/" +
-    startTime.getFullYear();
+  let day =startTime.getDate() +"/" + (startTime.getMonth() + 1) +"/" + startTime.getFullYear();
 
   //Tim danh sach thoi gian lam viec trong ngay
   staff.workTime.forEach((wt) => {
-    const startTime =
-      wt.startTime.getDate() +
-      "/" +
-      (wt.startTime.getMonth() + 1) +
-      "/" +
-      wt.startTime.getFullYear();
+    const startTime = wt.startTime.getDate() + "/" + (wt.startTime.getMonth() + 1) + "/" + wt.startTime.getFullYear();
     if (day === startTime) {
       workTimeInDay.push(wt);
     }
@@ -65,13 +55,16 @@ exports.totalWorkTime = (staff) => {
       console.log("endTime == null");
       return totalTimeWorked;
     } else {
-      const minutesStart =
-        wt.startTime.getHours() + wt.startTime.getMinutes() / 60;
-      const minutesEnd = wt.endTime.getHours() + wt.endTime.getMinutes() / 60;
-      const total = minutesEnd - minutesStart;
+      // const minutesStart =
+      //   wt.startTime.getHours() + wt.startTime.getMinutes() / 60;
+      // const minutesEnd = wt.endTime.getHours() + wt.endTime.getMinutes() / 60;
+      // const total = minutesEnd - minutesStart;
+      
+      // const hoursWorked = wt.endTime.getHours() - wt.startTime.getHours();
+      // return (totalTimeWorked = totalTimeWorked + hoursWorked + total).toFixed(2);
 
-      const hoursWorked = wt.endTime.getHours() - wt.startTime.getHours();
-      return (totalTimeWorked = totalTimeWorked + hoursWorked + total).toFixed(2);
+      totalTimeWorked = totalTimeWorked + wt.totalTime;
+      return totalTimeWorked;
     }
   });
 

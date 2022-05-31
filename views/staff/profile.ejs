@@ -1,57 +1,93 @@
 <%- include('../includes/head.ejs') %>
-    <link rel="stylesheet" href="/css/staff.css" />
+<link rel="stylesheet" href="/css/staff.css" />
 
-    <body>
-        <%- include('../includes/navigation.ejs') %>
-            <h2 class="profileTitle">Thông tin cá nhân</h2>
-            <div class="infoUser">
-                <div class="infoUser__image">
-                    <img src="<%=staff.staffInfo.image%>" alt="Avata" />
-                </div>
+<body>
+  <%- include('../includes/navigation.ejs') %>
+  <h2 class="profileTitle">Thông tin cá nhân</h2>
+  <div class="infoUser">
+    <div class="infoUser__image">
+      <img src="<%=staff.staffInfo.image%>" alt="Avata" />
+    </div>
+    <div class="infoUser__info">
+      <form action="update-profile" method="POST" class="infoUser__info">
+        <div class="input__info">
+          <label for="userId">ID</label>
+          <input type="text" id="userId" disabled value="<%=staff.id%>" />
+        </div>
 
-                <form action="update-profile" method="POST" class="infoUser__info">
-                    <div class="input__info">
-                        <label for="userId">ID</label>
-                        <input type="text" id="userId" disabled value="<%=staff.id%>" />
-                    </div>
+        <div class="input__info">
+          <label for="name">Họ tên</label>
+          <input
+            type="text"
+            id="name"
+            disabled
+            value="<%=staff.staffInfo.name %>"
+          />
+        </div>
 
-                    <div class="input__info">
-                        <label for="name">Họ tên</label>
-                        <input type="text" id="name" disabled value="<%=staff.staffInfo.name %>" />
-                    </div>
+        <div class="input__info">
+          <label for="doB">Ngày sinh</label>
+          <input
+            type="text"
+            id="doB"
+            disabled
+            value="<%=staff.staffInfo.doB.getDate()+'/'+(staff.staffInfo.doB.getMonth() +1)+'/'+staff.staffInfo.doB.getFullYear()%>"
+          />
+        </div>
 
-                    <div class="input__info">
-                        <label for="doB">Ngày sinh</label>
-                        <input type="text" id="doB" disabled value="<%=staff.staffInfo.doB.getDate()+'/'+(staff.staffInfo.doB.getMonth() +1)+'/'+staff.staffInfo.doB.getFullYear()%>" />
-                    </div>
+        <div class="input__info">
+          <label for="salaryScale">Hệ số lương</label>
+          <input
+            type="text"
+            id="salaryScale"
+            disabled
+            value="<%=staff.staffInfo.salaryScale%>"
+          />
+        </div>
 
-                    <div class="input__info">
-                        <label for="salaryScale">Hệ số lương</label>
-                        <input type="text" id="salaryScale" disabled value="<%=staff.staffInfo.salaryScale%>" />
-                    </div>
+        <div class="input__info">
+          <label for="startDate">Ngày bắt đầu</label>
+          <input
+            type="text"
+            id="startDate"
+            disabled
+            value="<%=staff.staffInfo.startDate.getDate()+'/'+(staff.staffInfo.startDate.getMonth() +1)+'/'+staff.staffInfo.startDate.getFullYear()%>"
+          />
+        </div>
 
-                    <div class="input__info">
-                        <label for="startDate">Ngày bắt đầu</label>
-                        <input type="text" id="startDate" disabled value="<%=staff.staffInfo.startDate.getDate()+'/'+(staff.staffInfo.startDate.getMonth() +1)+'/'+staff.staffInfo.startDate.getFullYear()%>" />
-                    </div>
+        <div class="input__info">
+          <label for="department">Phòng ban</label>
+          <input
+            type="text"
+            id="department"
+            disabled
+            value="<%=staff.staffInfo.department%>"
+          />
+        </div>
 
-                    <div class="input__info">
-                        <label for="department">Phòng ban</label>
-                        <input type="text" id="department" disabled value="<%=staff.staffInfo.department%>" />
-                    </div>
+        <div class="input__info">
+          <label for="annualLeave">Ngày nghỉ còn lại</label>
+          <input
+            type="text"
+            id="annualLeave"
+            disabled
+            value="<%= staff.staffInfo.annualLeave%>"
+          />
+        </div>
 
-                    <div class="input__info">
-                        <label for="annualLeave">Ngày nghỉ còn lại</label>
-                        <input type="text" id="annualLeave" disabled value="<%= staff.staffInfo.annualLeave%>" />
-                    </div>
+        <div class="input__info">
+          <label for="image">Url hình ảnh</label>
+          <input
+            type="text"
+            id="image"
+            name="staffImage"
+            value="<%=staff.staffInfo.image%>"
+          />
+        </div>
 
-                    <div class="input__info">
-                        <label for="image">Url hình ảnh</label>
-                        <input type="text" id="image" name="staffImage" value="<%=staff.staffInfo.image%>" />
-                    </div>
-
-                    <button type="submit">Lưu</button>
-                </form>
-            </div>
-    </body>
-    <%- include('../includes/end.ejs') %>
+        <button type="submit">Lưu</button>
+      </form>
+    </div>
+  </div>
+</body>
+<%- include('../includes/end.ejs') %>

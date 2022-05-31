@@ -151,6 +151,8 @@ staffSchema.methods.addTimeWorked = function () {
     totalTime = workedInDay.totalTimeWorked;
   } else {
     console.log('totalTime > 8');
+    console.log('totalTimeWorked',workedInDay.totalTimeWorked);
+    console.log('totalTimeWorked',workedInDay.day);
     totalTime =8
     overTime = Math.abs(workedInDay.totalTimeWorked -8);
   }

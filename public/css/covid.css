@@ -1,0 +1,49 @@
+@media screen and (min-width: 769px) {
+  .tab{
+    display: none;
+  }
+  .main {
+    padding: 2rem;
+    display: flex;
+  }
+  .group__button button {
+    margin-top: 0.5rem;
+    height: 10rem;
+    border-radius: 2.5rem;
+    font-size: 2.8rem;
+  }
+  .vaccine__content {
+    width: 100%;
+    background-color: #0c9df127;
+    border-radius: 2.5rem;
+    display: flex;
+    justify-content: space-around;
+  }
+}
+@media screen and (max-width: 768px) {
+  .tab{
+    display: flex;
+    justify-content: space-around;
+    height: 4rem;
+  }
+  #temperature{
+    /* display: none; */
+  }
+  .tabItem h2{
+    text-align: center;
+
+  }
+  .tabItem button{
+    display: block;
+    margin: auto;
+    height: 4rem;
+    /* width: 100%; */
+  }
+  
+  #vaccineInfo{
+    display: none;
+  }
+  #infectCovidInfo{
+    display: none;
+  }
+}

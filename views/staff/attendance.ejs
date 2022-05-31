@@ -47,13 +47,13 @@
   </div>
 
   <hr />
-  <div class="grid attendance__content">
+  <div class="grid attendance">
     <% if(staff.workTime.length > 0){%>
-    <div class="attendance__content--left">
-      <div class="attendance__content--leftTitle">
+    <div class="attendance__content">
+      <div class="attendance__content--Title">
         <h3>Danh sách điểm danh</h3>
       </div>
-      <div class="attendance__content--leftContent">
+      <div class="attendance__content--Content">
         <% for (const[i,time] of staff.workTime.entries()) {%>
         <article class="card product-item">
           <!-- <header class="card__header">

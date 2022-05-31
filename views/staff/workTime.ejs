@@ -6,9 +6,14 @@
 
 <body>
   <%- include('../includes/navigation.ejs') %>
+  <div class="mobile__btn">
+    <button class="btn js-leave" onclick="leaveClickHandler()">Nghỉ phép</button>
+    <button class="btn js-workTime" onclick="workTimeClickHandler()">DS làm việc</button>
+    <button class="btn js-salary" onclick="salaryClickHandler()">Lương</button>
+  </div>
   <div class="workTime__content">
 
-    <div class="workTime__content--left">
+    <div class="workTime__content--left js-left">
       <div class="card__content">
         
           <header class="card__header">
@@ -16,7 +21,8 @@
           </header>
           <% for (time of staff.leave) {%>
           <!-- <div class="card__content"> -->
-            <hr>
+            <!-- <hr> -->
+            <br>
             <p class="">
               Từ:
               <%=time.startDay.getDate()+'/'+(time.startDay.getMonth()+1)+'/'+time.startDay.getFullYear()%>
@@ -33,42 +39,46 @@
       </div>
     </div>
 
-    <div class="workTime__content--center">
-      <%for(tWork of timeWorked){%>
-      <article class="card product-item">
-        <div class="card__content maxHeight">
-          <h3 class="" style="text-align: center">Ngày <%=tWork.date%></h3>
-          <h4 class="" >
-            Tổng thời gian: <%=tWork.totalTime.toFixed(2)%> giờ
-          </h4>
-          <h4 class="" >
-            Tăng ca: <%=tWork.overTime.toFixed(2)%> giờ
-          </h4>
-          <hr />
-          <% for(time of tWork.workTimes) {%>
-          <p class="">Nơi làm việc: <%=time.workPlace%></p>
-          <span
-            >Bắt đầu:
-            <%=time.startTime.getHours()+':'+time.startTime.getMinutes()+':'+time.startTime.getSeconds()%></span
-          >
-          <span>
-            - Kết thúc: <%=time.endTime==null ? 'Chưa kết thúc' :
-            time.endTime.getHours()+':'+time.endTime.getMinutes()+':'+time.endTime.getSeconds()%></span
-          >
-          <hr />
-          <%}%>
-        </div>
-      </article>
-      <%}%>
+    <div class="workTime__content--center js-center">
+      <div class="workTime__content--center__title">
+        <h2>Danh sách thời gian làm việc</h2>
+      </div>
+      <div class="workTime__content--center__content">
+
+        <%for(tWork of timeWorked){%>
+        <article class="card product-item">
+          <div class="card__content maxHeight">
+            <h3 class="" style="text-align: center">Ngày <%=tWork.date%></h3>
+            <h4 class="" >
+              Tổng thời gian: <%=tWork.totalTime.toFixed(2)%> giờ
+            </h4>
+            <h4 class="" >
+              Tăng ca: <%=tWork.overTime.toFixed(2)%> giờ
+            </h4>
+            <hr />
+            <% for(time of tWork.workTimes) {%>
+            <p class="">Nơi làm việc: <%=time.workPlace%></p>
+            <p>Bắt đầu:
+              <%=time.startTime.getHours()+':'+time.startTime.getMinutes()+':'+time.startTime.getSeconds()%></p
+            >
+            <p>Kết thúc: <%=time.endTime==null ? 'Chưa kết thúc' :
+              time.endTime.getHours()+':'+time.endTime.getMinutes()+':'+time.endTime.getSeconds()%></p
+            >
+            <hr />
+            <%}%>
+          </div>
+        </article>
+        <%}%>
+      </div>
     </div>
 
-    <div class="workTime__content--right">
+    <div class="workTime__content--right js-right">
       <div class="salary__info">
         <h2>Bảng lương</h2>
       </div>
-      <div class="salary">
-        <form action="/salary" method="POST">
-          <input class="input" type="hidden" id="month" name="month" />
+      <form action="/salary" method="POST">
+        <div class="salary">
+        <input class="input" type="hidden" id="month" name="month" value="" />
           <h3>Chọn tháng</h3>
           <select id="selectMonth" onchange="handleSelectMonth(this)">
             <option selected value=""></option>
@@ -85,11 +95,11 @@
             <option value="11">11</option>
             <option value="12">12</option>
           </select>
-          <button class="btn" type="submit">Xác nhận</button>
+        </div>
+          <button class="btn btn-salary" type="submit">Xác nhận</button>
         </form>
 
-      </div>
-      <div class="card__content">
+      <div class="card__content--salary">
         <h2><%=month==null?'':'Tháng: '+month%></h2>
         <h4>Hệ số lương: <%=staff.staffInfo.salaryScale%></h4>
         <h4>Thời gian làm việc: <%=salary.totalTime.toFixed(2)%> giờ</h4>
@@ -102,5 +112,6 @@
   </div>
 </body>
 <script src="/js/modal.js"></script>
+<script src="/js/workTime.js"></script>
 <script src="/js/clock.js"></script>
 <%- include('../includes/end.ejs') %>

@@ -1,47 +1,69 @@
-.info__staff {
-    text-align: center;
-    width: 50%;
-    margin: auto;
-    padding: .1rem;
+
+ 
+@media screen and (min-width: 769px) {
+    .info__staff {
+        text-align: center;
+        width: 50%;
+        margin: auto;
+        padding: .1rem;
+    }
+    
+    .attendance {
+        
+        display: flex;
+        justify-content: space-around;
+    }
+    
+    .attendance__content {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 75%;
+    }
+    
+    .attendance__content--Title {
+        text-align: center;
+    }
+    
+    .attendance__content--Content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
 }
 
-.attendance__content {
-    /* background-color: aqua; */
-    display: flex;
-    justify-content: space-around;
-}
 
-.attendance__content--left {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 75%;
-}
+@media screen and (max-width: 768px) {
 
-.attendance__content--leftTitle {
-    text-align: center;
-}
-
-.attendance__content--leftContent {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-}
-
-.attendance__content--right {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    width: 25%;
-    border-left: 2rem solid black;
-}
-
-.attendance__content--rightTitle {
-    text-align: center;
-}
-
-.attendance__content--rightContent {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    .info__staff {
+        /* text-align: center; */
+        /* width: 50%; */
+        /* margin: auto; */
+        padding: 1rem;
+    }
+    .info__staff h1{
+        text-align: center;
+    }
+    .btn {
+        margin: auto;
+        display: block;
+        margin-bottom: .5rem;
+        width: 80%;
+        height: 5rem;
+    }
+    
+    
+    
+    .attendance__content--Title {
+        text-align: center;
+    }
+    .attendance__content{
+        width: 100%;
+        text-align: center;
+    }
+    .attendance__content--Content {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column-reverse;
+    }
 }

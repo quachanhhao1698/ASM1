@@ -10,3 +10,13 @@ body{
 .content h1 {
   font-size: 6.4rem;
 }
+
+@media (max-width: 768px) {
+  .content{
+    text-align: center;
+    padding: 2.0rem;
+  }
+  .content h1 {
+    font-size: 3.2rem;
+  }
+}

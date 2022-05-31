@@ -1,21 +1,23 @@
 <%- include('../includes/head.ejs') %>
 <link rel="stylesheet" href="/css/main.css" />
 <link rel="stylesheet" href="/css/modal.css" />
-<link rel="stylesheet" href="/css/vaccine.css" />
+<link rel="stylesheet" href="/css/covid.css" />
 
 <body>
   <%- include('../includes/navigation.ejs') %>
   <div class="main">
     <div class="group__button">
-      <button class="btn" onclick="showModal__temperature()">Thân nhiệt</button>
-      <button class="btn" onclick="showModal__vaccineInfo()">
-        Tiêm Vaccine
-      </button>
-      <button class="btn" onclick="showModal__infectCovidInfo()">Nhiễm Covid</button>
+    </div>
+
+    <div class="tab">
+      <button class="btn" onclick="openTabItem('temperature')">Thân nhiệt</button>
+      <button class="btn" onclick="openTabItem('vaccineInfo')">Tiêm Vaccine</button>
+      <button class="btn" onclick="openTabItem('infectCovidInfo')">Nhiễm Covid</button>
     </div>
     <div class="vaccine__content">
-      <div>
+      <div id="temperature" class="tabItem">
         <h2>Thông tin thân nhiệt</h2>
+        <button class="btn" onclick="showModal__temperature()">Thêm thông tin</button>
         <ul>
           <%for(bt of bodyTemperature){%>
           <li>
@@ -28,8 +30,9 @@
           <%}%>
         </ul>
       </div>
-      <div>
+      <div id="vaccineInfo" class="tabItem">
         <h2>Thông tin tiêm vaccine</h2>
+        <button class="btn" onclick="showModal__vaccineInfo()">Thêm thông tin</button>
         <ul>
           <%for(const[i,v] of vaccineInfo.entries()){%>
             <li>Mui <%=i+1%></li>
@@ -42,7 +45,10 @@
           <%}%>
         </ul>
       </div>
-      <div><h2>Thông tin nhiễm covid</h2>
+      <div id="infectCovidInfo" class="tabItem">
+        <h2>Thông tin nhiễm covid</h2>
+        <button class="btn" onclick="showModal__infectCovidInfo()">Thêm thông tin</button>
+
         <ul>
           <%for(const[i,v] of infectCovidInfo.entries()){%>
             <li>Lần nhiễm thứ : <%=i+1%></li>
@@ -219,6 +225,7 @@
   </div>
 </body>
 <script src="/js/modal.js"></script>
+<script src="/js/covid.js"></script>
 <script src="/js/modalVaccine.js"></script>
 
 <%- include('../includes/end.ejs') %>
